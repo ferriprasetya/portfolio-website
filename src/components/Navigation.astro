@@ -1,0 +1,68 @@
+---
+import { Icon } from 'astro-icon/components'
+
+const navMenu = ['home', 'about', 'experience', 'skills', 'projects', 'contact']
+---
+
+<my-navigation
+  class="flex flex-col gap-6 rounded-20 py-4 px-2 bg-brand-dark2 border-0.5 border-brand-gray w-fit h-fit fixed inset-y-0 my-auto right-16 text-brand-gray"
+  data-sections={navMenu}
+>
+  {
+    navMenu.map((menu) => (
+      <a href={`#${menu}`} id={`nav-${menu}`} title={menu}>
+        <Icon name={menu} size={24} class="cursor-pointer" />
+        <span class="sr-only">{menu}</span>
+      </a>
+    ))
+  }
+</my-navigation>
+
+<style></style>
+
+<script>
+  let sections = []
+  class Navigation extends HTMLElement {
+    constructor() {
+      super()
+
+      sections = this.dataset.sections.split(',').map((section) => ({
+        name: section,
+        activePosition: document.getElementById(section).offsetTop,
+      }))
+    }
+  }
+
+  customElements.define('my-navigation', Navigation)
+
+  let currentActive = window.location.href.split('#')[1] ?? 'home'
+  // scroll on first load
+  document.getElementById(currentActive).scrollIntoView({ behavior: 'smooth' })
+  const layout = document.querySelector('.layout')
+
+  const setActiveMenu = () => {
+    const navLink = document.querySelector(`#nav-${currentActive}>svg`)
+    const currentActiveElement = document.querySelector(
+      `my-navigation .text-brand`,
+    )
+    if (currentActiveElement) {
+      currentActiveElement.classList.remove('text-brand')
+    }
+    navLink.classList.add('text-brand')
+  }
+  setActiveMenu()
+
+  const checkActiveMenu = () => {
+    const activeSection = sections.findLast(
+      (section) => layout.scrollTop >= section.activePosition,
+    )
+    if (activeSection.name !== currentActive) {
+      currentActive = activeSection.name
+      setActiveMenu()
+    }
+  }
+
+  layout.addEventListener('scroll', (event) => {
+    checkActiveMenu()
+  })
+</script>

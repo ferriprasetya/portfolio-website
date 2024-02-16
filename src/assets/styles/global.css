@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply bg-brand-dark1 overflow-x-hidden;
+}
+p {
+  @apply m-0;
+}
+.layout {
+  @apply overflow-y-scroll scroll-smooth snap-y snap-mandatory;
+}
+
+.layout > * {
+  @apply snap-start;
+}
+/* customize scrollbar */
+/* width */
+::-webkit-scrollbar {
+  @apply w-1.5;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-brand-gray rounded;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-brand;
+}
