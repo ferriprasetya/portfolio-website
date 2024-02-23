@@ -1,0 +1,16 @@
+---
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  name: string
+}
+
+const { name } = Astro.props
+---
+
+<div
+  class="w-fit text-brand-gray text-xs sm:text-base rounded-md sm:rounded-lg px-3 sm:px-4 py-2 sm:py-3 border border-brand-gray flex items-center gap-2 sm:gap-3"
+>
+  <Icon name={name} />
+  <p class="capitalize font-medium">{name}</p>
+</div>

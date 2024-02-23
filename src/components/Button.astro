@@ -1,0 +1,42 @@
+---
+import { Icon } from 'astro-icon/components'
+
+type Props = {
+  label: string
+  icon?: string
+  disabled?: boolean
+  padding?: string
+  color?: string
+  type?: 'fill' | 'outline'
+  width?: string
+  textStyle?: string
+}
+
+const {
+  label,
+  icon,
+  disabled,
+  padding = 'p-2',
+  type = 'fill',
+  width = 'w-full',
+  textStyle = 'uppercase font-semibold text-sm',
+} = Astro.props
+
+const className = [
+  width,
+  padding,
+  textStyle,
+  'rounded-full flex gap-3 items-center justify-center',
+  type === 'fill'
+    ? 'bg-brand text-brand-dark hover:bg-opacity-80'
+    : `border border-brand text-brand`,
+  disabled ? 'cursor-not-allowed' : 'cursor-pointer',
+]
+---
+
+<button class:list={className}>
+  {icon && <Icon name={icon} />}
+  <p>{label}</p>
+</button>
+
+<style></style>

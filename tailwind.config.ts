@@ -5,6 +5,20 @@ export default <Partial<Config>>{
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
+      fontSize: {
+        base: [
+          '1rem',
+          {
+            lineHeight: '20px',
+          },
+        ],
+        xxs: [
+          '10px',
+          {
+            lineHeight: '7px',
+          },
+        ],
+      },
       fontFamily: {
         sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
       },
