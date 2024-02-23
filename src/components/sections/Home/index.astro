@@ -1,0 +1,57 @@
+---
+import Breadcrumb from '@/components/Breadcrumb.astro'
+import SocialMedia from '@/components/SocialMedia.astro'
+import Button from '@/components/Button.astro'
+import ProfilePicture from './ProfilePicture.astro'
+---
+
+<div
+  id="home"
+  class="flex flex-col h-dvh overflow-hidden pt-4 md:pt-8 lg:pt-12"
+>
+  <div class="flex justify-between items-center">
+    <Breadcrumb name="home" />
+    <SocialMedia />
+  </div>
+  <div class="mt-9">
+    <p class="text-xl sm:text-2xl lg:text-4xl text-brand">
+      Hello<span class="text-white">, I'm</span>
+    </p>
+    <h1
+      class="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold uppercase text-white text-opacity-20"
+    >
+      Ferri Adi Prasetya
+    </h1>
+  </div>
+  <div
+    class="relative h-full lg:h-fit mt-10 lg:mt-auto flex gap-4 lg:gap-10 flex-col lg:flex-row"
+  >
+    <ProfilePicture />
+    <p
+      class="mx-auto lg:absolute bottom-4 right-4 max-w-80 text-sm md:text-base lg:text-xl font-light text-white text-center lg:text-right"
+    >
+      I <span class="text-brand">interested</span> to learn new thing, <span
+        class="text-brand">passionate</span
+      > on programming, and <span class="text-brand">put my heart</span> into my
+      work
+    </p>
+    <div class="flex flex-col gap-3 my-auto lg:mt-20">
+      <p class="text-white text-xl lg:text-2xl">I'm a</p>
+      <h3
+        class="text-3xl sm:text-5xl font-bold uppercase text-white text-opacity-20"
+      >
+        SOFTWARE ENGINEER
+      </h3>
+      <a href="#contact">
+        <Button
+          label="contact me"
+          icon="contact"
+          padding="px-20 py-2"
+          width="w-full sm:w-fit"
+        />
+      </a>
+    </div>
+  </div>
+</div>
+
+<style></style>

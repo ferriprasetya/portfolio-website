@@ -1,16 +1,19 @@
-# Astro Starter Kit: Basics
+# 🙋 Portfolio Website with Astro
 
-```sh
-npm create astro@latest -- --template basics
-```
+## 📑 Getting Started
+This project uses Astro for a fast and performant development experience. To run the development server, follow these steps:
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+1. **Install dependencies**: Run npm install in the project directory to install all required dependencies.
+2. **Start the development server**: Run npm run dev to start the development server. Astro will open your browser and navigate to http://localhost:4321 by default.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🔧 Technologies
+This project uses the following technologies:
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+- **[Astro](https://astro.build)**: A fast and performant web framework built with TypeScript.
+- **[Tailwind CSS](https://tailwindcss.com)**: A utility-first CSS framework for rapid styling.
+- **[TypeScript](https://www.typescriptlang.org)**: For type safety and improved code maintainability.
+- **[Astro Icon](https://www.astroicon.dev)**: A library for adding beautiful icons to your website.
+- **[Motion](https://www.framer.com/motion)**: A library for adding animations to your website.
 
 ## 🚀 Project Structure
 
@@ -18,24 +21,28 @@ Inside of your Astro project, you'll see the following folders and files:
 
 ```text
 /
-├── public/
-│   └── favicon.svg
-├── src/
+├── public/                             # Static assets served directly
+│   ├── favicon.svg
+│   └── ...other image
+├── src/                                # Project source files
+│   ├── assets/                         # All asset files
+│   │   ├── icons/                      # SVG icons used throughout the site
+│   │   │   ├── home.svg
+│   │   │   └── ...other svg icons
+│   │   └── styles/                     # Global CSS styles
+│   │       └── global.css
 │   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
+│   │   ├── Button.astro
+│   │   └── ...other global components
+│   │       └── sections/               # Individual sections
+│   │           ├── Home/               # Home section specific components
+│   │           └── ...other sections
+│   ├── layouts/                        # Main layout template
 │   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   └── pages/                          # Individual pages
+│       └── index.astro                 # Landing page
+└── package.json                        # Project dependencies and configuration
 ```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
@@ -44,11 +51,8 @@ All commands are run from the root of the project, from a terminal:
 | :------------------------ | :----------------------------------------------- |
 | `npm install`             | Installs dependencies                            |
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run lint`             | Auto format all file using [Prettier](https://prettier.io) and fix lint using [Eslint](https://eslint.org)   |
 | `npm run build`           | Build your production site to `./dist/`          |
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

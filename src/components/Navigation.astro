@@ -5,13 +5,22 @@ const navMenu = ['home', 'about', 'experience', 'skills', 'projects', 'contact']
 ---
 
 <my-navigation
-  class="flex flex-col gap-6 rounded-20 py-4 px-2 bg-brand-dark2 border-0.5 border-brand-gray w-fit h-fit fixed inset-y-0 my-auto right-16 text-brand-gray"
+  class:list={[
+    'text-brand-gray bg-brand-dark2 border-0.5 border-brand-gray w-fit h-fit',
+    'flex flex-col gap-6 rounded-20 py-4 px-2',
+    'fixed inset-y-0 my-auto right-3 md:right-16',
+  ]}
   data-sections={navMenu}
 >
   {
     navMenu.map((menu) => (
-      <a href={`#${menu}`} id={`nav-${menu}`} title={menu}>
-        <Icon name={menu} size={24} class="cursor-pointer" />
+      <a
+        href={`#${menu}`}
+        id={`nav-${menu}`}
+        title={menu}
+        class="text-base sm:text-2xl"
+      >
+        <Icon name={menu} class="cursor-pointer" />
         <span class="sr-only">{menu}</span>
       </a>
     ))

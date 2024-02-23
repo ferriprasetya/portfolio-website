@@ -10,6 +10,9 @@ html {
 p {
   @apply m-0;
 }
+img {
+  max-width: max-content !important;
+}
 .layout {
   @apply overflow-y-scroll scroll-smooth snap-y snap-mandatory;
 }

@@ -1,0 +1,103 @@
+---
+import { Image } from 'astro:assets'
+import JavascriptIcon from '@/assets/icons/javascript.svg'
+import TypescriptIcon from '@/assets/icons/typescript.svg'
+import VueIcon from '@/assets/icons/vuejs.svg'
+import ReactIcon from '@/assets/icons/react.svg'
+
+const techIcons = [
+  {
+    name: 'javascript',
+    title: 'JavaScript',
+    icon: JavascriptIcon,
+    size: 36,
+    style: 'p-3 lg:p-4 xl:p-5 left-4 xl:left-20 top-2 xl:top-5',
+    class: 'h-5 lg:h-9',
+  },
+  {
+    name: 'typescript',
+    title: 'TypeScript',
+    icon: TypescriptIcon,
+    size: 36,
+    style: 'p-3 lg:p-4 xl:p-5 right-4 xl:right-12 top-6 xl:top-20',
+    class: 'h-5 lg:h-9',
+  },
+  {
+    name: 'vuejs',
+    title: 'Vue',
+    icon: VueIcon,
+    size: 56,
+    style:
+      'px-3 lg:px-5 pt-4 lg:pt-6 pb-2 lg:pb-4 left-2 xl:left-10 bottom-12 xl:bottom-44',
+    class: 'h-8 lg:h-10 xl:h-14',
+  },
+  {
+    name: 'react',
+    title: 'React',
+    icon: ReactIcon,
+    size: 56,
+    style: 'p-3 lg:p-4 xl:p-5 right-0 xl:right-4 bottom-4 xl:bottom-16',
+    class: 'h-8 lg:h-10 xl:h-14',
+  },
+]
+---
+
+<div class="profile-picture relative w-fit mx-auto lg:mx-0">
+  <div
+    class=""
+    class:list={[
+      'h-56 md:h-72 lg:h-[500px] w-56 lg:w-72 lg:w-[500px] ',
+      'absolute -z-50 top-0 left-1/2 transform -translate-x-1/2',
+      'rounded-full bg-brand-dark2 opacity-20 drop-shadow-[-16px_40px_35px_rgba(0,0,0,0.25)]',
+    ]}
+  >
+  </div>
+  {
+    techIcons.map((icon) => (
+      <div
+        class={`animate-icon bg-brand-dark2 drop-shadow-[0px_8px_12px_2px_rgba(0,0,0,0.10)] rounded-full w-fit absolute ${icon.style}`}
+      >
+        <Image
+          class={`${icon.class} hover:scale-125 transition-all`}
+          width={icon.size}
+          height={icon.size}
+          src={icon.icon}
+          alt={icon.name}
+          title={icon.name}
+          loading="eager"
+        />
+      </div>
+    ))
+  }
+  <Image
+    width={600}
+    height={600}
+    class="w-64 md:w-80 lg:w-[450px] xl:w-[600px] mx-auto"
+    src="/profile-home.png"
+    alt="profile"
+    loading="eager"
+  />
+</div>
+
+<script>
+  import { animate, stagger, spring } from 'motion'
+
+  // animate icons when #home is show on screen
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting) {
+        animate(
+          '.animate-icon',
+          { opacity: [0, 1], x: [-100, 0], y: [100, 0] },
+          {
+            delay: stagger(0.1),
+            easing: spring({ stiffness: 200, damping: 30 }),
+          },
+        )
+      }
+    },
+    { threshold: 0.5 }, // Only trigger when 50% or more is visible
+  )
+
+  observer.observe(document.querySelector('#home'))
+</script>
