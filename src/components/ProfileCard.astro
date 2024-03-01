@@ -1,0 +1,75 @@
+---
+import Button from '@/components/Button.astro'
+import { Image } from 'astro:assets'
+import SocialMedia from '@/components/SocialMedia.astro'
+---
+
+<div
+  class="profile-card-container fixed left-0 md:left-auto xl:ml-1 right-0 md:right-auto top-2 md:inset-y-0 h-fit md:my-auto px-4 sm:px-8 md:px-0"
+>
+  <div
+    class="profile-card h-fit w-full md:w-fit bg-brand-dark1 px-3 md:px-4 lg:px-6 py-2 md:py-4 border-0.5 rounded-xl md:rounded-20"
+  >
+    <div
+      class="flex md:flex-col gap-4 md:gap-8 justify-between md:justify-normal items-center md:items-stretch text-white"
+    >
+      <div
+        class="flex md:flex-col items-center md:items-stretch gap-1 md:gap-8"
+      >
+        <div class="md:flex justify-between items-center order-1 md:order-none">
+          <h5 class="font-semibold md:text-2xl lg:text-3xl">Ferri</h5>
+          <p class="text-xs md:text-sm lg:text-base">Software Engineer</p>
+        </div>
+        <Image
+          width={129}
+          height={129}
+          class="w-12 md:w-32 lg:w-48 mx-auto rounded-lg md:rounded-2xl"
+          src="/profile-card.jpg"
+          alt="profile"
+          loading="eager"
+        />
+      </div>
+      <div class="text-center hidden md:block">
+        <a
+          class="hover:text-brand text-sm lg:text-base"
+          href="mailto:feriadiprasetya12@gmail.com"
+          >feriadiprasetya12@gmail.com</a
+        >
+        <p class="text-xs">Base in Central Java, Indonesia</p>
+      </div>
+      <div class="w-fit md:mx-auto">
+        <SocialMedia />
+      </div>
+    </div>
+    <a href="#contact" class="block mt-2 md:mt-16">
+      <Button
+        label="contact me"
+        icon="contact"
+        padding="px-12 xl:px-20 py-2"
+        btnStyle="btn-outline md:btn-fill"
+        textStyle="uppercase font-normal md:font-semibold text-xxs md:text-sm"
+      />
+    </a>
+  </div>
+</div>
+<script>
+  const container = document.querySelector('.profile-card-container')
+  const observer = new IntersectionObserver(
+    (entries) => {
+      // hide when entering home section
+      if (entries[0].isIntersecting) {
+        container.classList.add('-z-20')
+      } else {
+        container.classList.remove('-z-20')
+      }
+    },
+    { threshold: 0.2 }, // Only trigger when 20% or more is visible
+  )
+
+  observer.observe(document.querySelector('#home'))
+</script>
+<style>
+  .profile-card {
+    box-shadow: inset 0 0 8px 0 rgba(255, 255, 255, 0.2);
+  }
+</style>

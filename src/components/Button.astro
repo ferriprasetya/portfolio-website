@@ -7,7 +7,7 @@ type Props = {
   disabled?: boolean
   padding?: string
   color?: string
-  type?: 'fill' | 'outline'
+  btnStyle?: string
   width?: string
   textStyle?: string
 }
@@ -17,7 +17,7 @@ const {
   icon,
   disabled,
   padding = 'p-2',
-  type = 'fill',
+  btnStyle = 'btn-fill',
   width = 'w-full',
   textStyle = 'uppercase font-semibold text-sm',
 } = Astro.props
@@ -25,11 +25,9 @@ const {
 const className = [
   width,
   padding,
+  btnStyle,
   textStyle,
   'rounded-full flex gap-3 items-center justify-center',
-  type === 'fill'
-    ? 'bg-brand text-brand-dark hover:bg-opacity-80'
-    : `border border-brand text-brand`,
   disabled ? 'cursor-not-allowed' : 'cursor-pointer',
 ]
 ---
@@ -38,5 +36,3 @@ const className = [
   {icon && <Icon name={icon} />}
   <p>{label}</p>
 </button>
-
-<style></style>

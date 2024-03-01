@@ -23,7 +23,7 @@ img {
 /* customize scrollbar */
 /* width */
 ::-webkit-scrollbar {
-  @apply w-1.5;
+  @apply md:w-1.5;
 }
 
 /* Track */
@@ -39,4 +39,33 @@ img {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-brand;
+}
+
+@layer base {
+  .btn-fill {
+    @apply bg-brand text-brand-dark1 hover:bg-opacity-80;
+  }
+
+  .btn-outline {
+    @apply border border-brand text-brand;
+  }
+
+  .text-title {
+    @apply text-3xl lg:text-5xl text-white
+  }
+
+  .container-section {
+    @apply h-dvh pt-4 sm:pt-0 px-2 md:pl-[300px] lg:pl-[360px] xl:pl-[480px] flex flex-col justify-center gap-8 md:gap-9 pr-10
+  }
+}
+
+
+@layer utilities {
+  .btn-fill {
+    @apply bg-brand text-brand-dark1 hover:bg-opacity-80;
+  }
+
+  .btn-outline {
+    @apply bg-transparent border border-brand text-brand;
+  }
 }
