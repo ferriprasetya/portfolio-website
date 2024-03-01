@@ -1,12 +1,14 @@
 # 🙋 Portfolio Website with Astro
 
 ## 📑 Getting Started
+
 This project uses Astro for a fast and performant development experience. To run the development server, follow these steps:
 
 1. **Install dependencies**: Run npm install in the project directory to install all required dependencies.
 2. **Start the development server**: Run npm run dev to start the development server. Astro will open your browser and navigate to http://localhost:4321 by default.
 
 ## 🔧 Technologies
+
 This project uses the following technologies:
 
 - **[Astro](https://astro.build)**: A fast and performant web framework built with TypeScript.
@@ -43,16 +45,17 @@ Inside of your Astro project, you'll see the following folders and files:
 │       └── index.astro                 # Landing page
 └── package.json                        # Project dependencies and configuration
 ```
+
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run lint`             | Auto format all file using [Prettier](https://prettier.io) and fix lint using [Eslint](https://eslint.org)   |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| Command                   | Action                                                                                                     |
+| :------------------------ | :--------------------------------------------------------------------------------------------------------- |
+| `npm install`             | Installs dependencies                                                                                      |
+| `npm run dev`             | Starts local dev server at `localhost:4321`                                                                |
+| `npm run lint`            | Auto format all file using [Prettier](https://prettier.io) and fix lint using [Eslint](https://eslint.org) |
+| `npm run build`           | Build your production site to `./dist/`                                                                    |
+| `npm run preview`         | Preview your build locally, before deploying                                                               |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check`                                                           |
+| `npm run astro -- --help` | Get help using the Astro CLI                                                                               |
