@@ -1,9 +1,23 @@
 ---
-
+import Breadcrumb from '@/components/Breadcrumb.astro'
 ---
 
-<div id="about" class="h-dvh">
-  <p class="text-white">About</p>
+<div id="about" class="container-section">
+  <Breadcrumb name="about" />
+  <div class="flex flex-col gap-5 lg:gap-8">
+    <h3 class="text-title">
+      Curious, Creative, and Committed to <span class="text-brand"
+        >excellence</span
+      >
+    </h3>
+    <p class="md:text-xl lg:text-2xl text-brand-gray tracking-wide">
+      As a Software Engineer, I am thrilled to bring a unique blend of technical
+      expertise and a passion for problem-solving to every project. With my
+      knack for problem-solving and my love for technology, I bring over a year
+      of hands-on experience to the table. Let's build something amazing
+      together!
+    </p>
+  </div>
 </div>
 
 <style></style>
