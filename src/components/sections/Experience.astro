@@ -1,9 +1,80 @@
 ---
+import Breadcrumb from '@/components/Breadcrumb.astro'
 
+const experiences = [
+  {
+    from: 'November 2023',
+    to: 'Present',
+    job: 'Freelance',
+    company: '-',
+  },
+  {
+    from: 'November 2022',
+    to: 'November 2023',
+    job: 'Software Engineer',
+    company: 'Refactory',
+  },
+  {
+    from: 'August 2022',
+    to: 'November 2022',
+    job: 'Intensive Pairing',
+    company: 'Refactory',
+  },
+  {
+    from: 'July 2019',
+    to: 'June 2022',
+    job: 'Student of Computer and Network Engineering',
+    company: 'SMKN 1 Purwodadi',
+  },
+]
 ---
 
-<div id="experience" class="w-full h-dvh">
-  <p class="text-white">Experience</p>
+<div id="experience" class="container-section">
+  <Breadcrumb name="experience" />
+  <h3 class="text-title">
+    Education & <span class="text-brand">Experience</span>
+  </h3>
+  <div class="flex flex-col">
+    {
+      experiences.map((experience, index) => (
+        <div class="flex gap-4 text-white flex-1">
+          <div class="relative mt-0.5">
+            <div
+              class:list={[
+                index === 0 ? 'bg-brand' : 'bg-brand-gray',
+                'h-3 w-3 rounded-full',
+              ]}
+            />
+            <div
+              class:list={[
+                'absolute -z-10 top-0 w-[0.2px] bg-brand-gray left-1.5',
+                index === experiences.length - 1 ? 'bottom-5' : '-bottom-2',
+              ]}
+            />
+          </div>
+          <div class="pb-6">
+            <p class="text-xs md:text-sm">
+              {experience.from} -{' '}
+              <span
+                class={`${experience.to === 'Present' ? 'text-brand' : 'text-white'}`}
+              >
+                {experience.to}
+              </span>
+            </p>
+            <p class="text-2xl md:text-3xl font-medium">{experience.job}</p>
+            <p
+              class:list={[
+                'text-xs md:text-sm font-medium text-brand-gray',
+                { 'opacity-0': experience.company === '-' },
+              ]}
+            >
+              {experience.company}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
 </div>
 
 <style></style>
