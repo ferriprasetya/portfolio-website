@@ -1,9 +1,88 @@
 ---
+// todo: todo: fix cropped icon figma and next without using Image
+import { Icon } from 'astro-icon/components'
+import Breadcrumb from '@/components/Breadcrumb.astro'
+import Figma from '@/assets/icons/figma.svg'
+import Next from '@/assets/icons/nextjs.svg'
+import { Image } from 'astro:assets'
 
+const getYearDiff = (dateString: string) => {
+  const now = new Date()
+  const from = new Date(dateString)
+
+  return now.getFullYear() - from.getFullYear()
+}
+
+const skills = [
+  {
+    label: 'React',
+    year: getYearDiff('2021-11-16'),
+    icon: 'react',
+  },
+  {
+    label: 'Figma',
+    year: getYearDiff('2021-11-16'),
+    icon: Figma,
+  },
+  {
+    label: 'Vue',
+    year: getYearDiff('2022-12-1'),
+    icon: 'vuejs',
+  },
+  {
+    label: 'Next',
+    year: getYearDiff('2023-1-1'),
+    icon: Next,
+  },
+  {
+    label: 'Nuxt',
+    year: getYearDiff('2023-8-1'),
+    icon: 'nuxt',
+  },
+]
 ---
 
-<div id="skills" class="w-full h-dvh">
-  <p class="text-white">Skills</p>
+<div id="skills" class="container-section">
+  <Breadcrumb name="skills" />
+  <div class="flex flex-col gap-5 lg:gap-8">
+    <h3 class="text-title">
+      My <span class="text-brand">Advantages</span>
+    </h3>
+
+    <div class="flex flex-wrap gap-6 md:gap-8">
+      {
+        skills.map((skill, index) => (
+          <div class="flex flex-col gap-3">
+            <div
+              class:list={[
+                'skill-icon flex flex-col items-center justify-between border',
+                'w-20 lg:w-28 h-28 lg:h-36 px-3 lg:px-4 pt-5 lg:pt-6 pb-4 lg:pb-5 rounded-20 lg:rounded-3xl ',
+                'hover:bg-brand hover:bg-opacity-10 transition-colors',
+                index === 0 ? 'border-brand' : 'border-brand-gray',
+              ]}
+            >
+              {typeof skill.icon === 'string' ? (
+                <Icon name={skill.icon} class="text-4xl lg:text-5xl" />
+              ) : (
+                <Image
+                  class="w-9 h-9 lg:w-12 lg:h-12"
+                  src={skill.icon as ImageMetadata}
+                  alt={skill.label}
+                  title={skill.label}
+                  loading="lazy"
+                />
+              )}
+
+              <p class="text-brand md:text-2xl font-medium flex items-center gap-1">
+                +{skill.year} <span class="text-xs font-light">years</span>
+              </p>
+            </div>
+            <p class="text-white text-center font-medium">{skill.label}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
 </div>
 
 <style></style>
