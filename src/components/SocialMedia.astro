@@ -30,7 +30,7 @@ const platforms: Platform[] = [
   {
     platforms.map((platform) => (
       <a href={platform.url} title={platform.label} target="_blank">
-        <div class="text-base sm:text-3xl border-0.5 border-brand-gray p-1.5 rounded-full hover:border-brand text-brand-gray hover:text-brand">
+        <div class="text-base sm:text-3xl border-0.5 border-brand-gray p-1.5 rounded-full transition-colors hover:border-brand text-brand-gray hover:text-brand">
           <Icon name={platform.icon} class="cursor-pointer" />
           <span class="sr-only">{platform.icon}</span>
         </div>
