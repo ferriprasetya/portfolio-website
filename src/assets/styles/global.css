@@ -66,6 +66,6 @@ img {
   }
 
   .btn-outline {
-    @apply bg-transparent border border-brand text-brand;
+    @apply bg-transparent border border-brand text-brand hover:bg-brand hover:bg-opacity-20;
   }
 }
