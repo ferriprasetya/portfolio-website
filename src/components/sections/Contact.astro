@@ -1,9 +1,48 @@
 ---
-
+import Breadcrumb from '@/components/Breadcrumb.astro'
+import Input from '@/components/Input.astro'
+import Button from '@/components/Button.astro'
 ---
 
-<div id="contact" class="w-full h-dvh">
-  <p class="text-white">Contact</p>
+<div id="contact" class="container-section">
+  <Breadcrumb name="contact" />
+  <div class="flex flex-col gap-5 lg:gap-8">
+    <h3 class="text-title">
+      Let’s Work <span class="text-brand">Together!</span>
+    </h3>
+    <div>
+      <p class="text-xl md:text-3xl text-white">Send Email to:</p>
+      <p class="md:text-2xl text-brand">feriadiprasetya12@gmail.com</p>
+    </div>
+  </div>
+  <form id="contact-form" class="flex flex-col gap-x-6 gap-y-7">
+    <Input name="subject" label="Subject" placeholder="Your email subject" />
+    <Input
+      name="message"
+      label="Message"
+      type="textarea"
+      containerClass="col-span-2"
+      placeholder="Write your message here ..."
+    />
+    <Button
+      label="Send Email"
+      padding="px-20 py-2"
+      width="w-full md:w-fit col-span-2"
+      textStyle="text-sm font-semibold"
+    />
+  </form>
 </div>
 
+<script>
+  const contactForm: HTMLFormElement = document.querySelector('#contact-form')
+  const submitButton = contactForm.querySelector('button')
+
+  submitButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    const { subject, message } = Object.fromEntries(new FormData(contactForm))
+    window.open(
+      `mailto:feriadiprasetya12@gmail.com?subject=${subject}&body=${message}`,
+    )
+  })
+</script>
 <style></style>
