@@ -1,0 +1,45 @@
+---
+type Props = {
+  label: string
+  name: string
+  placeholder?: string
+  type?: string
+  containerClass?: string
+  inputClass?: string
+}
+
+const {
+  label,
+  name,
+  type = 'text',
+  inputClass,
+  containerClass,
+  placeholder,
+} = Astro.props
+---
+
+<div class:list={['w-full', containerClass]}>
+  <label class="text-white">
+    {label}
+    {
+      type === 'textarea' ? (
+        <textarea
+          class="bg-transparent py-2 outline-none border-b border-brand-gray focus:border-brand transition-colors duration-300 font-light placeholder:text-brand-gray min-h-36"
+          class:list={['w-full', inputClass]}
+          name={name}
+          placeholder={placeholder}
+        />
+      ) : (
+        <input
+          class="bg-transparent py-2 outline-none border-b border-brand-gray focus:border-brand transition-colors duration-300 font-light placeholder:text-brand-gray"
+          class:list={['w-full', inputClass]}
+          type={type as astroHTML.JSX.HTMLInputTypeAttribute}
+          name={name}
+          placeholder={placeholder}
+        />
+      )
+    }
+  </label>
+</div>
+
+<style></style>
