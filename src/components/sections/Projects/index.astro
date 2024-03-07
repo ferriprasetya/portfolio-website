@@ -1,0 +1,70 @@
+---
+import Breadcrumb from '@/components/Breadcrumb.astro'
+import { Image } from 'astro:assets'
+import ProjectCard from '@/components/sections/Projects/ProjectCard.astro'
+import { prefetch } from 'astro:prefetch'
+
+const projects = [
+  {
+    label: 'Genesis by LionParcel',
+    description:
+      'An internal website from Lion Parcel to manage their daily operation',
+    image: '/projects/genesis.png',
+    url: '',
+    isInternal: true,
+    tech: ['Vue'],
+  },
+  {
+    label: 'LILO by LionParcel',
+    description:
+      'An internal website from Lion Parcel for warehouse management',
+    image: '/projects/lilo.png',
+    url: '',
+    isInternal: true,
+    tech: ['Vue'],
+  },
+  {
+    label: 'MNC Aladinmall',
+    description: 'MNC E commerce Android App',
+    image: '/projects/aladinmall.png',
+    url: 'https://aladinmall.id',
+    isInternal: false,
+    tech: ['Kotlin', 'Supabase'],
+  },
+  {
+    label: 'Mediverse Landing Page',
+    description: 'Landing page for Mediverse Super App',
+    image: '/projects/mediverse.png',
+    url: 'https://mediverse.id/',
+    isInternal: false,
+    tech: ['React'],
+  },
+  {
+    label: 'AMS Dashboard',
+    description:
+      'Attendance management system to manage employee or student attendances',
+    image: '/projects/ams.png',
+    url: '',
+    isInternal: true,
+    tech: ['Nuxt', 'Supabase'],
+  },
+]
+---
+
+<div
+  id="projects"
+  class="container-section pt-32 pb-12 md:py-12 justify-start overflow-hidden"
+>
+  <Breadcrumb name="projects" />
+  <div class="flex flex-col gap-5 lg:gap-8 max-h-full">
+    <h3 class="text-title">
+      Featured <span class="text-brand">Projects</span>
+    </h3>
+
+    <div class="flex flex-col gap-6 pb-20 overflow-y-auto pr-1">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </div>
+</div>
+
+<style></style>

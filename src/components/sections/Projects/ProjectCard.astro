@@ -1,0 +1,130 @@
+---
+import Button from '@/components/Button.astro'
+import { Image } from 'astro:assets'
+
+type Project = {
+  label: string
+  description: string
+  image: string
+  url: string
+  isInternal: boolean
+  tech: string[]
+}
+type Props = {
+  project: Project
+}
+
+const { project } = Astro.props
+---
+
+<div class="flex flex-col gap-2 md:gap-4">
+  <div class="card-container" data-is-internal={`${project.isInternal}`}>
+    <div class="card-item card-front">
+      <div class="relative -z-30">
+        <Image
+          height={583}
+          width={384}
+          class="rounded-2xl w-full lg:w-96 max-w-96"
+          src={project.image}
+          alt={project.label}
+          loading="eager"
+        />
+        <div class="absolute bottom-2 left-2 flex gap-2">
+          {
+            project.tech.map((tech) => (
+              <p class="text-white text-xs font-medium px-3.5 py-2 bg-brand-dark1 bg-opacity-80 border border-brand-gray rounded-full">
+                {tech}
+              </p>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <div class="card-item card-back">
+      <div class="relative -z-30">
+        <Image
+          height={583}
+          width={384}
+          class="rounded-2xl w-full lg:w-96 max-w-96"
+          src={project.image}
+          alt={project.label}
+          loading="eager"
+        />
+        <div
+          class="absolute inset-0 bg-brand-dark1 bg-opacity-80 flex items-center flex-col justify-center px-4 gap-4"
+        >
+          <p class="text-white text-center">{project.description}</p>
+          {
+            !project.isInternal && (
+              <a href={project.url} target="_blank" class="block">
+                <Button
+                  label="View Website"
+                  padding="px-4 py-2"
+                  btnStyle="btn-outline"
+                  width="w-fit"
+                  textStyle="text-sm font-medium"
+                />
+              </a>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="text-white font-medium md:text-xl">{project.label}</p>
+</div>
+
+<script>
+  const cardContainers: NodeListOf<HTMLElement> =
+    document.querySelectorAll('.card-container')
+  const cardItems: NodeListOf<HTMLElement> =
+    document.querySelectorAll('.card-item')
+
+  // set container height same as item height on resize
+  const onCardSizeChanged = () => {
+    cardItems.forEach((cardItem) => {
+      const height = cardItem.offsetHeight
+
+      cardContainers.forEach((cardContainer) => {
+        cardContainer.style.height = `${height}px`
+      })
+    })
+  }
+
+  new ResizeObserver(onCardSizeChanged).observe(cardItems[0])
+</script>
+<style>
+  .card-container {
+    @apply w-full lg:w-96 max-w-96 h-[247px];
+    -webkit-perspective: 150rem;
+    perspective: 150rem;
+    -moz-perspective: 150rem;
+    position: relative;
+  }
+
+  .card-item {
+    -webkit-transition: all 0.8s ease;
+    transition: all 0.8s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    overflow: hidden;
+  }
+
+  .card-back {
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+  }
+
+  .card-container:hover .card-front {
+    -webkit-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+  }
+
+  .card-container:hover .card-back {
+    -webkit-transform: rotateY(0);
+    transform: rotateY(0);
+  }
+</style>
