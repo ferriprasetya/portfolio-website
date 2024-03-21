@@ -24,7 +24,7 @@ const { project } = Astro.props
         <Image
           height={583}
           width={384}
-          class="rounded-2xl w-full lg:w-96 max-w-96"
+          class="card-image rounded-2xl w-full lg:w-96 max-w-96"
           src={project.image}
           alt={project.label}
           loading="eager"
@@ -83,16 +83,16 @@ const { project } = Astro.props
     document.querySelectorAll('.card-container')
   const cardItems: NodeListOf<HTMLElement> =
     document.querySelectorAll('.card-item')
+  const cardImage: HTMLImageElement = document.querySelector('.card-image')
 
   // set container height same as item height on resize
   const onCardSizeChanged = () => {
-    cardItems.forEach((cardItem) => {
-      const height = cardItem.offsetHeight
-
+    if (cardImage.complete) {
+      const height = cardImage.offsetHeight
       cardContainers.forEach((cardContainer) => {
         cardContainer.style.height = `${height}px`
       })
-    })
+    }
   }
 
   onCardSizeChanged()
