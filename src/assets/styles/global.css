@@ -51,14 +51,13 @@ img {
   }
 
   .text-title {
-    @apply text-3xl lg:text-5xl text-white
+    @apply text-xl sm:text-3xl lg:text-5xl text-white;
   }
 
   .container-section {
-    @apply h-dvh pt-4 sm:pt-0 px-2 md:pl-[300px] lg:pl-[360px] xl:pl-[480px] flex flex-col justify-center gap-8 md:gap-9 pr-10
+    @apply h-dvh pt-4 sm:pt-0 px-2 md:pl-[300px] lg:pl-[360px] xl:pl-[480px] flex flex-col justify-center gap-8 md:gap-9 pr-10;
   }
 }
-
 
 @layer utilities {
   .btn-fill {

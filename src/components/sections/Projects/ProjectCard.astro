@@ -24,7 +24,7 @@ const { project } = Astro.props
         <Image
           height={583}
           width={384}
-          class="rounded-2xl w-full lg:w-96 max-w-96"
+          class="card-image rounded-2xl w-full lg:w-96 max-w-96"
           src={project.image}
           alt={project.label}
           loading="eager"
@@ -32,7 +32,7 @@ const { project } = Astro.props
         <div class="absolute bottom-2 left-2 flex gap-2">
           {
             project.tech.map((tech) => (
-              <p class="text-white text-xs font-medium px-3.5 py-2 bg-brand-dark1 bg-opacity-80 border border-brand-gray rounded-full">
+              <p class="text-white text-xxs sm:text-xs font-medium px-3.5 py-2 bg-brand-dark1 bg-opacity-80 border border-brand-gray rounded-full">
                 {tech}
               </p>
             ))
@@ -53,7 +53,9 @@ const { project } = Astro.props
         <div
           class="absolute inset-0 bg-brand-dark1 bg-opacity-80 flex items-center flex-col justify-center px-4 gap-4"
         >
-          <p class="text-white text-center">{project.description}</p>
+          <p class="text-white text-center text-sm sm:text-base">
+            {project.description}
+          </p>
           {
             !project.isInternal && (
               <a href={project.url} target="_blank" class="block">
@@ -71,7 +73,9 @@ const { project } = Astro.props
       </div>
     </div>
   </div>
-  <p class="text-white font-medium md:text-xl">{project.label}</p>
+  <p class="text-white font-medium text-sm sm:text-base md:text-xl">
+    {project.label}
+  </p>
 </div>
 
 <script>
@@ -79,18 +83,19 @@ const { project } = Astro.props
     document.querySelectorAll('.card-container')
   const cardItems: NodeListOf<HTMLElement> =
     document.querySelectorAll('.card-item')
+  const cardImage: HTMLImageElement = document.querySelector('.card-image')
 
   // set container height same as item height on resize
   const onCardSizeChanged = () => {
-    cardItems.forEach((cardItem) => {
-      const height = cardItem.offsetHeight
-
+    if (cardImage.complete) {
+      const height = cardImage.offsetHeight
       cardContainers.forEach((cardContainer) => {
         cardContainer.style.height = `${height}px`
       })
-    })
+    }
   }
 
+  onCardSizeChanged()
   new ResizeObserver(onCardSizeChanged).observe(cardItems[0])
 </script>
 <style>
