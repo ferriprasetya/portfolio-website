@@ -13,10 +13,10 @@ const getYearDiff = (dateString: string) => {
   const from = new Date(dateString)
   let diff = now.getFullYear() - from.getFullYear()
   if (diff < 1) {
-    return '-1'
+    return 1
   }
 
-  return `+${diff}`
+  return diff
 }
 
 const skills = [
@@ -90,7 +90,7 @@ const skills = [
               )}
 
               <p class="text-brand md:text-2xl font-medium flex items-center gap-1">
-                {skill.year} <span class="text-xs font-light">years</span>
+                <span class="text-nowrap">± {skill.year}</span> <span class="text-xs font-light">years</span>
               </p>
             </div>
             <p class="text-sm sm:text-base text-white text-center font-medium">
