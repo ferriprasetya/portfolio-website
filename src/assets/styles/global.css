@@ -14,7 +14,7 @@ img {
   max-width: max-content !important;
 }
 .layout {
-  @apply overflow-y-scroll scroll-smooth snap-y snap-mandatory;
+  @apply overflow-y-scroll scroll-smooth md:snap-y md:snap-mandatory;
 }
 
 .layout > * {
@@ -55,7 +55,7 @@ img {
   }
 
   .container-section {
-    @apply h-dvh pt-4 sm:pt-0 px-2 md:pl-[300px] lg:pl-[360px] xl:pl-[480px] flex flex-col justify-center gap-8 md:gap-9 pr-10;
+    @apply h-fit md:h-svh py-10 sm:pt-0 px-2 md:pl-[300px] lg:pl-[360px] xl:pl-[480px] flex flex-col justify-center gap-8 md:gap-9 pr-10;
   }
 }
 
