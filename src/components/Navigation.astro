@@ -8,7 +8,7 @@ const navMenu = ['home', 'about', 'experience', 'skills', 'projects', 'contact']
   class:list={[
     'text-brand-gray bg-brand-dark2 border-0.5 border-brand-gray w-fit h-fit',
     'flex flex-col gap-6 rounded-20 py-4 px-2',
-    'fixed z-10 inset-y-0 my-auto right-3 md:right-10 xl:right-16',
+    'fixed z-30 inset-y-0 my-auto right-3 md:right-10 xl:right-16',
   ]}
   data-sections={navMenu}
 >
@@ -73,5 +73,15 @@ const navMenu = ['home', 'about', 'experience', 'skills', 'projects', 'contact']
 
   layout.addEventListener('scroll', (event) => {
     checkActiveMenu()
+  })
+
+  // handle smooth scrolling
+  const navLinks = document.querySelectorAll('a[href^="#"]')
+  navLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault()
+      const id = link.getAttribute('href').substring(1)
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' })
+    })
   })
 </script>
