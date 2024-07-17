@@ -4,13 +4,19 @@ import { Icon } from 'astro-icon/components'
 import Breadcrumb from '@/components/Breadcrumb.astro'
 import Figma from '@/assets/icons/figma.svg'
 import Next from '@/assets/icons/nextjs.svg'
+import Kotlin from '@/assets/icons/kotlin.svg'
+import Laravel from '@/assets/icons/laravel.svg'
 import { Image } from 'astro:assets'
 
 const getYearDiff = (dateString: string) => {
   const now = new Date()
   const from = new Date(dateString)
+  let diff = now.getFullYear() - from.getFullYear()
+  if (diff < 1) {
+    return '-1'
+  }
 
-  return now.getFullYear() - from.getFullYear()
+  return `+${diff}`
 }
 
 const skills = [
@@ -38,6 +44,16 @@ const skills = [
     label: 'Nuxt',
     year: getYearDiff('2023-8-1'),
     icon: 'nuxt',
+  },
+  {
+    label: 'Laravel',
+    year: getYearDiff('2024-4-1'),
+    icon: Laravel,
+  },
+  {
+    label: 'Kotlin',
+    year: getYearDiff('2024-4-1'),
+    icon: Kotlin,
   },
 ]
 ---
@@ -74,7 +90,7 @@ const skills = [
               )}
 
               <p class="text-brand md:text-2xl font-medium flex items-center gap-1">
-                +{skill.year} <span class="text-xs font-light">years</span>
+                {skill.year} <span class="text-xs font-light">years</span>
               </p>
             </div>
             <p class="text-sm sm:text-base text-white text-center font-medium">

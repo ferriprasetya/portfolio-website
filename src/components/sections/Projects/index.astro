@@ -1,8 +1,6 @@
 ---
 import Breadcrumb from '@/components/Breadcrumb.astro'
-import { Image } from 'astro:assets'
 import ProjectCard from '@/components/sections/Projects/ProjectCard.astro'
-import { prefetch } from 'astro:prefetch'
 
 const projects = [
   {
@@ -44,9 +42,9 @@ const projects = [
     description:
       'Attendance management system to manage employee or student attendances',
     image: '/projects/ams.png',
-    url: '',
-    isInternal: true,
-    tech: ['Nuxt', 'Supabase'],
+    url: 'https://amsdigitalid.netlify.app',
+    isInternal: false,
+    tech: ['Nuxt', 'Laravel', 'Supabase'],
   },
 ]
 ---
