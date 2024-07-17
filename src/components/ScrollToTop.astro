@@ -16,7 +16,7 @@ import Button from './Button.astro'
 
 
   function scrollFunction() {
-    if (scrollToTopBtn) {
+    if (scrollToTopBtn && window.innerWidth < 768) {
       if (
         layout.scrollTop > screen.height / 2 ||
         document.documentElement.scrollTop > screen.height / 2
