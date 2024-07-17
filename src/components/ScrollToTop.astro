@@ -1,0 +1,30 @@
+---
+import Button from './Button.astro'
+---
+
+<a id="scroll-to-top" href="#home" class="fixed z-40 bottom-4 right-4 hidden">
+  <Button icon="to-top" btnStyle="bg-brand !rounded-full !p-4 shadow-xl" textStyle="text-brand-dark1" />
+</a>
+
+<script>
+  const scrollToTopBtn = document.getElementById('scroll-to-top')
+  const layout = document.querySelector('.layout')
+
+  layout.addEventListener("scroll", (_event) => {
+    scrollFunction()
+  });
+
+
+  function scrollFunction() {
+    if (scrollToTopBtn && window.innerWidth < 768) {
+      if (
+        layout.scrollTop > screen.height / 2 ||
+        document.documentElement.scrollTop > screen.height / 2
+      ) {
+        scrollToTopBtn.style.display = 'block'
+      } else {
+        scrollToTopBtn.style.display = 'none'
+      }
+    }
+  }
+</script>

@@ -2,7 +2,7 @@
 import { Icon } from 'astro-icon/components'
 
 type Props = {
-  label: string
+  label?: string
   icon?: string
   disabled?: boolean
   padding?: string
@@ -34,5 +34,5 @@ const className = [
 
 <button class:list={className}>
   {icon && <Icon name={icon} />}
-  <p>{label}</p>
+  {label && <p>{label}</p>}
 </button>
