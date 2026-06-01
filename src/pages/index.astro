@@ -8,17 +8,21 @@ import Projects from '@/components/sections/Projects/index.astro'
 import Contact from '@/components/sections/Contact.astro'
 import ProfileCard from '@/components/ProfileCard.astro'
 import ScrollToTop from '@/components/ScrollToTop.astro'
+import Navigation from '@/components/Navigation.astro'
 ---
 
 <Layout title="Ferri Adi Prasetya | Portfolio Website">
-  <Home />
-  <ProfileCard />
-  <ScrollToTop />
-  <About />
-  <Experience />
-  <Skills />
-  <Projects />
-  <Contact />
+  <div class="layout w-dvw h-dvh px-4 sm:px-8 md:px-10 xl:px-24 relative">
+    <Navigation />
+    <Home />
+    <ProfileCard />
+    <ScrollToTop />
+    <About />
+    <Experience />
+    <Skills />
+    <Projects />
+    <Contact />
+  </div>
 </Layout>
 
 <style></style>

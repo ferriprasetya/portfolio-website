@@ -1,0 +1,46 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import ProjectCard from '@/components/sections/Projects/ProjectCard.astro'
+import { projects } from '@/data/projects'
+---
+
+<Layout
+  title="Projects | Ferri Adi Prasetya"
+  description="Explore Ferri Adi Prasetya's portfolio projects across frontend development, internal dashboards, ecommerce, landing pages, and full-stack web applications."
+>
+  <main
+    id="projects"
+    class="min-h-dvh px-4 sm:px-10 py-24 md:px-20 max-w-7xl mx-auto"
+  >
+    <section class="flex max-w-7xl flex-col gap-8">
+      <div class="flex max-w-3xl flex-col gap-4">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand">
+          Portfolio Projects
+        </p>
+        <h1 class="text-3xl font-semibold text-white sm:text-5xl">
+          Selected work, operational products, and shipped interfaces.
+        </h1>
+        <p class="text-sm leading-7 text-brand-gray sm:text-base">
+          A collection of projects I have worked on, including internal tools,
+          product dashboards, mobile commerce, and landing page experiences.
+          Highlighted cards mark projects where my contribution was especially
+          hands-on.
+        </p>
+        <a
+          href="/"
+          class="w-fit rounded-full border border-brand px-5 py-2.5 text-sm font-semibold uppercase text-brand transition hover:bg-brand hover:text-brand-dark1 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+        >
+          Back to Portfolio
+        </a>
+      </div>
+
+      <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        {
+          projects.map((project) => (
+            <ProjectCard project={project} variant="grid" />
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</Layout>
