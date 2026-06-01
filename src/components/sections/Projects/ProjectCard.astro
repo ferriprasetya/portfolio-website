@@ -162,7 +162,7 @@ const titleId = `${modalId}-title`
               <p class="w-fit rounded-full border border-brand-gray px-4 py-2 text-sm font-medium text-brand-gray">
                 Internal project
               </p>
-            ) : (
+            ) : project.url ? (
               <a
                 href={project.url}
                 target="_blank"
@@ -171,6 +171,10 @@ const titleId = `${modalId}-title`
               >
                 View Website
               </a>
+            ) : (
+              <p class="w-fit rounded-full border border-brand-gray px-4 py-2 text-sm font-medium text-brand-gray">
+                Website not available
+              </p>
             )
           }
         </div>
