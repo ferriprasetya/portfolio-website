@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components'
 
 const navMenu = ['home', 'about', 'experience', 'skills', 'projects', 'contact']
+const isHomePage = Astro.url.pathname === '/'
 ---
 
 <my-navigation
@@ -15,7 +16,13 @@ const navMenu = ['home', 'about', 'experience', 'skills', 'projects', 'contact']
   {
     navMenu.map((menu) => (
       <a
-        href={`#${menu}`}
+        href={
+          isHomePage
+            ? `#${menu}`
+            : menu === 'projects'
+              ? '/projects'
+              : `/#${menu}`
+        }
         id={`nav-${menu}`}
         title={menu}
         class="text-base sm:text-xl lg:text-2xl"
@@ -35,18 +42,28 @@ const navMenu = ['home', 'about', 'experience', 'skills', 'projects', 'contact']
     constructor() {
       super()
 
-      sections = this.dataset.sections.split(',').map((section) => ({
-        name: section,
-        activePosition: document.getElementById(section).offsetTop,
-      }))
+      sections = this.dataset.sections
+        .split(',')
+        .map((section) => {
+          const element = document.getElementById(section)
+          if (!element) return null
+
+          return {
+            name: section,
+            activePosition: element.offsetTop,
+          }
+        })
+        .filter(Boolean)
     }
   }
 
   customElements.define('my-navigation', Navigation)
 
-  let currentActive = window.location.href.split('#')[1] ?? 'home'
+  let currentActive = window.location.pathname.startsWith('/projects')
+    ? 'projects'
+    : window.location.href.split('#')[1] ?? 'home'
   // scroll on first load
-  document.getElementById(currentActive).scrollIntoView({ behavior: 'smooth' })
+  document.getElementById(currentActive)?.scrollIntoView({ behavior: 'smooth' })
   const layout = document.querySelector('.layout')
 
   const setActiveMenu = () => {
@@ -57,21 +74,25 @@ const navMenu = ['home', 'about', 'experience', 'skills', 'projects', 'contact']
     if (currentActiveElement) {
       currentActiveElement.classList.remove('text-brand')
     }
-    navLink.classList.add('text-brand')
+    navLink?.classList.add('text-brand')
   }
   setActiveMenu()
 
   const checkActiveMenu = () => {
+    if (!sections.length || !layout) return
+
     const activeSection = sections.findLast(
       (section) => layout.scrollTop >= section.activePosition,
     )
+    if (!activeSection) return
+
     if (activeSection.name !== currentActive) {
       currentActive = activeSection.name
       setActiveMenu()
     }
   }
 
-  layout.addEventListener('scroll', (event) => {
+  layout?.addEventListener('scroll', () => {
     checkActiveMenu()
   })
 
@@ -81,7 +102,7 @@ const navMenu = ['home', 'about', 'experience', 'skills', 'projects', 'contact']
     link.addEventListener('click', (event) => {
       event.preventDefault()
       const id = link.getAttribute('href').substring(1)
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' })
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
     })
   })
 </script>

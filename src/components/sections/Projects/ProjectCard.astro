@@ -1,71 +1,175 @@
 ---
-import Button from '@/components/Button.astro'
 import { Image } from 'astro:assets'
+import type { Project } from '@/data/projects'
 
-type Project = {
-  label: string
-  description: string
-  image: string
-  url: string
-  isInternal: boolean
-  tech: string[]
-}
 type Props = {
   project: Project
+  variant?: 'list' | 'grid'
 }
 
-const { project } = Astro.props
+const { project, variant = 'list' } = Astro.props
+const modalId = `project-modal-${project.slug}`
+const titleId = `${modalId}-title`
 ---
 
-<div class="flex flex-col gap-2 md:gap-4">
-  <div class="card-container" data-is-internal={`${project.isInternal}`}>
-    <div class="card-item card-front">
-      <div class="relative -z-30">
-        <Image
-          height={583}
-          width={384}
-          class="card-image rounded-2xl w-full lg:w-96 max-w-96"
-          src={project.image}
-          alt={project.label}
-          loading="eager"
-        />
-        <div class="absolute bottom-2 left-2 flex gap-2">
-          {
-            project.tech.map((tech) => (
-              <p class="text-white text-xxs sm:text-xs font-medium px-3.5 py-2 bg-brand-dark1 bg-opacity-80 border border-brand-gray rounded-full">
-                {tech}
-              </p>
-            ))
-          }
-        </div>
+<article
+  class:list={[
+    'project-card group relative',
+    variant === 'grid' ? 'h-full' : 'max-w-xl',
+  ]}
+>
+  <button
+    type="button"
+    class:list={[
+      'project-card-trigger flex h-full w-full flex-col gap-3 text-left',
+      'rounded-[22px] border bg-brand-dark2/60 p-2',
+      project.highlightedContribution
+        ? 'border-brand/70 shadow-[0_0_0_1px_rgba(112,242,177,0.12)]'
+        : 'border-brand-gray/40',
+      'transition duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_48px_rgba(112,242,177,0.12)]',
+      'focus:outline-none focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/70',
+      variant === 'list' && 'lg:w-[34rem]',
+    ]}
+    aria-haspopup="dialog"
+    aria-controls={modalId}
+    data-project-modal-target={modalId}
+  >
+    <div class="relative aspect-[875/564] w-full overflow-hidden rounded-2xl">
+      <Image
+        height={564}
+        width={875}
+        class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+        src={project.image}
+        alt={project.label}
+        loading="eager"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-brand-dark1 via-brand-dark1/10 to-transparent opacity-90"
+      >
+      </div>
+      {
+        project.highlightedContribution && (
+          <p class="absolute left-3 top-3 rounded-full border border-brand bg-brand-dark1/40 px-3 py-1.5 text-xxs font-semibold uppercase text-brand backdrop-blur">
+            High Contribution
+          </p>
+        )
+      }
+      <div class="absolute bottom-3 left-3 right-3 flex flex-wrap gap-2">
+        {
+          project.tech.map((tech) => (
+            <p class="rounded-full border border-brand-gray bg-brand-dark1/80 px-3 py-1.5 text-xxs font-medium text-white backdrop-blur sm:text-xs">
+              {tech}
+            </p>
+          ))
+        }
       </div>
     </div>
-    <div class="card-item card-back">
-      <div class="relative -z-30">
-        <Image
-          height={583}
-          width={384}
-          class="rounded-2xl w-full lg:w-96 max-w-96"
-          src={project.image}
-          alt={project.label}
-          loading="eager"
-        />
+
+    <div class="flex flex-col gap-2 px-1 pb-2">
+      <p class="text-sm font-semibold text-white sm:text-base md:text-lg">
+        {project.label}
+      </p>
+      <p class="line-clamp-2 text-xs leading-5 text-brand-gray sm:text-sm">
+        {project.description}
+      </p>
+    </div>
+  </button>
+
+  <div
+    id={modalId}
+    class="project-modal fixed inset-0 z-50 hidden items-center justify-center px-4 py-6"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby={titleId}
+    hidden
+  >
+    <div
+      class="project-modal-backdrop absolute inset-0 bg-brand-dark1/85 backdrop-blur-md"
+      data-project-modal-close
+    >
+    </div>
+    <div
+      class="project-modal-panel relative max-h-[90dvh] w-full max-w-6xl overflow-y-auto rounded-20 border border-brand-gray/50 bg-brand-dark2 shadow-[0_28px_80px_rgba(0,0,0,0.35)]"
+    >
+      <button
+        type="button"
+        class="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-brand-gray bg-brand-dark1 text-xl leading-none text-white transition hover:border-brand hover:text-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+        aria-label={`Close ${project.label} detail`}
+        data-project-modal-close
+      >
+        &times;
+      </button>
+
+      <div
+        class="grid gap-6 p-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)] md:p-6"
+      >
         <div
-          class="absolute inset-0 bg-brand-dark1 bg-opacity-80 flex items-center flex-col justify-center px-4 gap-4"
+          class="overflow-hidden rounded-2xl border border-brand-gray/40 bg-brand-dark1"
         >
-          <p class="text-white text-center text-sm sm:text-base">
-            {project.description}
-          </p>
+          <Image
+            height={564}
+            width={875}
+            class="aspect-[875/564] h-full w-full object-cover"
+            src={project.image}
+            alt={project.label}
+            loading="lazy"
+          />
+        </div>
+
+        <div class="flex flex-col gap-5 py-2 md:py-4">
+          <div class="flex flex-col gap-3">
+            {
+              project.highlightedContribution && (
+                <p class="w-fit rounded-full border border-brand bg-brand/15 px-3 py-1.5 text-xxs font-semibold uppercase text-brand">
+                  High Contribution
+                </p>
+              )
+            }
+            <h2
+              id={titleId}
+              class="text-2xl font-semibold text-white md:text-4xl"
+            >
+              {project.label}
+            </h2>
+            <p class="text-sm leading-6 text-brand-gray md:text-base">
+              {project.description}
+            </p>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <p
+              class="text-sm font-semibold uppercase tracking-[0.18em] text-brand"
+            >
+              My Contribution
+            </p>
+            <p class="text-sm leading-7 text-white/85 md:text-base">
+              {project.contribution}
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-2">
+            {
+              project.tech.map((tech) => (
+                <p class="rounded-full border border-brand-gray bg-brand-dark1 px-3 py-2 text-xs font-medium text-white">
+                  {tech}
+                </p>
+              ))
+            }
+          </div>
+
           {
-            !project.isInternal && (
-              <a href={project.url} target="_blank" class="block">
-                <Button
-                  label="View Website"
-                  padding="px-4 py-2"
-                  btnStyle="btn-outline"
-                  width="w-fit"
-                  textStyle="text-sm font-medium"
-                />
+            project.isInternal ? (
+              <p class="w-fit rounded-full border border-brand-gray px-4 py-2 text-sm font-medium text-brand-gray">
+                Internal project
+              </p>
+            ) : (
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noreferrer"
+                class="w-fit rounded-full border border-brand px-5 py-2.5 text-sm font-semibold text-brand transition hover:bg-brand hover:text-brand-dark1 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+              >
+                View Website
               </a>
             )
           }
@@ -73,63 +177,100 @@ const { project } = Astro.props
       </div>
     </div>
   </div>
-  <p class="text-white font-medium text-sm sm:text-base md:text-xl">
-    {project.label}
-  </p>
-</div>
+</article>
 
 <script>
-  const cardContainers: NodeListOf<HTMLElement> =
-    document.querySelectorAll('.card-container')
-  const cardItems: NodeListOf<HTMLElement> =
-    document.querySelectorAll('.card-item')
-  const cardImage: HTMLImageElement = document.querySelector('.card-image')
+  // @ts-nocheck
+  import { animate, stagger } from 'motion'
 
-  // set container height same as item height on resize
-  const onCardSizeChanged = () => {
-    if (cardImage.complete) {
-      const height = cardImage.offsetHeight
-      cardContainers.forEach((cardContainer) => {
-        cardContainer.style.height = `${height}px`
-      })
+  const layout = document.querySelector('.layout')
+  const triggers = document.querySelectorAll('[data-project-modal-target]')
+  const closeButtons = document.querySelectorAll('[data-project-modal-close]')
+  let activeTrigger = null
+  let activeModal = null
+
+  const setScrollLock = (isLocked) => {
+    document.documentElement.classList.toggle('overflow-hidden', isLocked)
+    document.body.classList.toggle('overflow-hidden', isLocked)
+    layout?.classList.toggle('overflow-hidden', isLocked)
+  }
+
+  const openModal = (trigger) => {
+    const modalId = trigger.dataset.projectModalTarget
+    const modal = modalId ? document.getElementById(modalId) : null
+    const panel = modal?.querySelector('.project-modal-panel')
+
+    if (!modal || !panel) return
+
+    activeTrigger = trigger
+    activeModal = modal
+    modal.hidden = false
+    modal.classList.remove('hidden')
+    modal.classList.add('flex')
+    setScrollLock(true)
+
+    animate(modal, { opacity: [0, 1] }, { duration: 0.2 })
+    animate(
+      panel,
+      { opacity: [0, 1], y: [24, 0], scale: [0.97, 1] },
+      { duration: 0.35, easing: [0.16, 1, 0.3, 1] },
+    )
+
+    const closeButton = modal.querySelector('[data-project-modal-close]')
+    if (closeButton instanceof HTMLElement) {
+      closeButton.focus()
     }
   }
 
-  onCardSizeChanged()
-  new ResizeObserver(onCardSizeChanged).observe(cardItems[0])
+  const closeModal = async () => {
+    if (!activeModal) return
+
+    const modal = activeModal
+    const panel = modal.querySelector('.project-modal-panel')
+
+    if (panel) {
+      await Promise.all([
+        animate(modal, { opacity: [1, 0] }, { duration: 0.18 }).finished,
+        animate(
+          panel,
+          { opacity: [1, 0], y: [0, 16], scale: [1, 0.98] },
+          { duration: 0.18 },
+        ).finished,
+      ])
+    }
+
+    modal.classList.add('hidden')
+    modal.classList.remove('flex')
+    modal.hidden = true
+    setScrollLock(false)
+    activeModal = null
+    activeTrigger?.focus()
+    activeTrigger = null
+  }
+
+  triggers.forEach((trigger) => {
+    trigger.addEventListener('click', () => openModal(trigger))
+  })
+
+  closeButtons.forEach((button) => {
+    button.addEventListener('click', () => closeModal())
+  })
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && activeModal) {
+      closeModal()
+    }
+  })
+
+  animate(
+    '.project-card-trigger',
+    { opacity: [0, 1], y: [20, 0] },
+    { delay: stagger(0.08), duration: 0.45, easing: [0.16, 1, 0.3, 1] },
+  )
 </script>
+
 <style>
-  .card-container {
-    @apply w-full lg:w-96 max-w-96 h-[247px];
-    -webkit-perspective: 150rem;
-    perspective: 150rem;
-    -moz-perspective: 150rem;
-    position: relative;
-  }
-
-  .card-item {
-    -webkit-transition: all 0.8s ease;
-    transition: all 0.8s ease;
-    position: absolute;
-    top: 0;
-    left: 0;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    overflow: hidden;
-  }
-
-  .card-back {
-    -webkit-transform: rotateY(180deg);
-    transform: rotateY(180deg);
-  }
-
-  .card-container:hover .card-front {
-    -webkit-transform: rotateY(-180deg);
-    transform: rotateY(-180deg);
-  }
-
-  .card-container:hover .card-back {
-    -webkit-transform: rotateY(0);
-    transform: rotateY(0);
+  .project-modal[hidden] {
+    display: none;
   }
 </style>
